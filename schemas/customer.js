@@ -38,7 +38,9 @@ const customerSchema = new mongoose.Schema({
         ],
         debts: [
             debtSchema
-        ]
+        ],
+        date: Date
+        
 })
 
 module.exports = mongoose.model("customer", customerSchema);
