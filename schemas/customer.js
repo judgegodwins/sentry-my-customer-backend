@@ -38,8 +38,7 @@ const customerSchema = new mongoose.Schema({
         ],
         debts: [
             debtSchema
-        ],
-        
+        ]
 })
 
 module.exports = mongoose.model("customer", customerSchema);
