@@ -5,7 +5,7 @@ const HttpStatus = require('../util/http_status');
 
 router.get("*", (req, res) => {
     // res.status(404).json({status: "error", Message: "Endpoint Route Not Valid"})
-    Response.failure(res, {error: true, message: "API endpoint not found"}, HttpStatus.NOT_FOUND);
+    Response.failure(res, {error: true, message: "Route not found"}, HttpStatus.NOT_FOUND);
 });
 
 module.exports = router;
