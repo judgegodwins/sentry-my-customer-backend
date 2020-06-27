@@ -39,7 +39,6 @@ const customerSchema = new mongoose.Schema({
         debts: [
             debtSchema
         ],
-        date: Date
         
 })
 
