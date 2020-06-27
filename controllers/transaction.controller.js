@@ -29,7 +29,7 @@ exports.create = async (req, res, next) => {
             }
         };
         // gets user_ref_id
-        var user_ref_id = UserModel.find({
+        var user_ref_id = await UserModel.findOne({
             email: req.user.email
         }, function (err, result) {
             if (err) {
@@ -37,11 +37,11 @@ exports.create = async (req, res, next) => {
             };
         });
 
-		user_ref_id = user_ref_id[0]._id;
+		user_ref_id = user_ref_id._id;
 
 
         // gets customer_ref_id
-        var customer_ref_id = CustomerModel.findOne({
+        var customer_ref_id = await CustomerModel.findOne({
             phone_number: req.body.phone_number
         }, function (err, result) {
             if (err) {
@@ -49,16 +49,16 @@ exports.create = async (req, res, next) => {
             };
         });
 
-		customer_ref_id = customer_ref_id[0]._id;
+		customer_ref_id = customer_ref_id._id;
         // gets store_ref_id
-        var store_ref_id = StoreModel.find({
+        var store_ref_id = await StoreModel.findOne({
             store_name: req.body.store_name
         }, function (err, result) {
             if (err) {
                 throw err
             };
         });
-		store_ref_id = store_ref_id[0]._id;
+		store_ref_id = store_ref_id._id;
 
         let transaction = new Transaction({
             amount: amount,
