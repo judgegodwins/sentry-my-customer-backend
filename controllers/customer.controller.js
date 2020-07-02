@@ -72,27 +72,25 @@ exports.create = async (req, res) => {
 };
 
 exports.getById = (req, res) => {
+  const identifier = req.user.phone_number;
+  let id = req.params.customerId;
   try {
-    Customer.findById(req.params.customerId, (error, customer) => {
-      if (error) {
-        res.status(404).send({
-          status: false,
-          message: error.message,
-          error: {
-            code: 404,
-            message: error.message
-          }
+    UserModel.findOne({ identifier })
+      .then(user => {
+        // let store = user.stores.find(store => store.customers.find(customer => customer._id === id));
+        // res.json(store);
+        let allCustomers = [];
+        user.stores.forEach(store => {
+          store.customers.forEach(customer => {
+            allCustomers.push(customer); // bring out all customers from various stors and put in one array
+          })
+          // let a = [];
+          // a.push(store.customers);
         });
-      } else {
-        res.status(200).json({
-          status: true,
-          message: "Customer was found",
-          data: {
-            customer
-          }
-        });
-      }
-    });
+        let customerToBeSent = allCustomers.find(customer => customer._id == id);
+
+        res.json(customerToBeSent);
+      })
   } catch (error) {
     res.status(500).json({
       status: false,
